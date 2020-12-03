@@ -9,25 +9,62 @@ faculty::faculty(){
   department = "";
 }
 
-faculty::faculty(int facultyID, string name, string department){
-  facultyID = facultyID;
-  name = name;
-  department = department;
+faculty::faculty(int id, string n, string d){
+  facultyID = id;
+  name = n;
+  department = d;
 }
 
 faculty::~faculty(){
 
 }
 
-
-void faculty::equality(int id){
-
+int faculty::getID() const{
+  return facultyID;
 }
 
-void faculty::lessThan(int id){
-
+string faculty::getName() const{
+  return name;
 }
 
-void faculty::greaterThan(int id){
+string faculty::getDep() const{
+  return department;
+}
 
+bool faculty::operator==(const faculty& f){
+  faculty f1 = *this;
+  faculty f2 = f;
+
+  return f1.getID() == f2.getID();
+}
+
+bool faculty::operator<(const faculty& f){
+  faculty f1 = *this;
+  faculty f2 = f;
+
+  return f1.getID() < f2.getID();
+}
+
+bool faculty::operator>(const faculty& f){
+  faculty f1 = *this;
+  faculty f2 = f;
+
+  return f1.getID() > f2.getID();
+}
+
+bool faculty::operator!=(const faculty& s){
+  faculty s1 = *this;
+  faculty s2 = s;
+  return s1.getID() != s2.getID();
+}
+std::ostream& operator<<(std::ostream& os, const faculty& f){
+  os << f.getID();
+  //os = s.getID();
+  return os;
+}
+
+void faculty::print(){
+  cout << "ID: " << facultyID << endl;
+  cout << "Name: " << name << endl;
+  cout << "Department: " << department << endl;
 }

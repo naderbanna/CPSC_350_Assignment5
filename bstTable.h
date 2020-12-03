@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 template <class temp>
 class TreeNode{
   public:
@@ -5,8 +8,8 @@ class TreeNode{
     TreeNode(temp k);
     ~TreeNode();
 
+    //bool operator!= (const TreeNode& f);
     temp key;
-
     TreeNode *left;
     TreeNode *right;
 };
@@ -26,13 +29,20 @@ TreeNode<temp>::TreeNode(temp k){
 
 template <class temp>
 TreeNode<temp>::~TreeNode(){
-  //delete current??
+
 }
+
+// template <class temp>
+// bool TreeNode<temp>::operator!=(const TreeNode& t){
+//   TreeNode t1 = *this;
+//   TreeNode t2 = t;
+//   return t1 != t2;
+// }
 
 template <class temp>
 class bstTable{
   private:
-    TreeNode *root;
+    TreeNode<temp> *root;
 
   public:
     bstTable();
@@ -43,41 +53,45 @@ class bstTable{
     bool deleteNode(temp k);
 
     bool isEmpty();
-    unsigned int getSize();
-    temp getMin();
+    //unsigned int getSize();
+    //temp getMin();
     temp getMax();
-    temp recPrint(TreeNode *node);
+    void recPrint(TreeNode<temp> *node);
+    void printEntireTree();
 
-    TreeNode* getSuccessor(TreeNode *d);
-
-
+    TreeNode<temp>* getSuccessor(TreeNode<temp> *d);
 };
 
+template <class temp>
 bstTable<temp>::bstTable(){
   root = NULL;
 }
 
+template <class temp>
 bstTable<temp>::~bstTable(){
   //iterate and deleted => 0(n)
+  //delete current;
 }
 
 template <class temp>
 void bstTable<temp>::insertNode(temp value){
-  TreeNode *node = new TreeNode(value);
+  TreeNode<temp> *node = new TreeNode<temp>(value);
   if(isEmpty()){
+    cout << "inserted to tree" << endl;
     root = node;
   }
   else{
-    TreeNode *current = root;
-    TreeNode *parent = NULL;
+    TreeNode<temp> *current = root;
+    TreeNode<temp> *parent = NULL;
 
     while(true){
       parent = current;
 
-      if(value < current-> key){
+      if(value < current->key){
         current = current->left;
         if(current == NULL){
           parent->left = node;
+          cout << "inserted to tree" << endl;
           break;
         }
       }
@@ -85,6 +99,7 @@ void bstTable<temp>::insertNode(temp value){
         current = current->right;
         if(current = NULL){
           parent->right = node;
+          cout << "inserted to tree" << endl;
           break;
         }
       }
@@ -97,7 +112,8 @@ bool bstTable<temp>::searchNode(temp value){
   if(isEmpty())
     return false;
   else{
-    TreeNode *current = root;
+    cout << "searching" << endl;
+    TreeNode<temp> *current = root;
     while(current->key != value){
       if(value < current->key)
         current = current->left;
@@ -116,8 +132,8 @@ bool bstTable<temp>::deleteNode(temp k){
   if(isEmpty())
     return false;
 
-  TreeNode *current = root;
-  TreeNode *parent = root;
+  TreeNode<temp> *current = root;
+  TreeNode<temp> *parent = root;
   bool ifLeftChild = true;
 
   while(current->key != k){
@@ -179,12 +195,12 @@ bool bstTable<temp>::deleteNode(temp k){
   }
   else{
     //node to delete has two children
-    TreeNode *successor = getSuccessor(current);
+    TreeNode<temp> *successor = getSuccessor(current);
     if(current == root){
       root = successor;
     }
     else if(ifLeftChild){
-      parent->left = sucessor;
+      parent->left = successor;
     }
     else{
       parent->right = successor;
@@ -204,21 +220,21 @@ bool bstTable<temp>::isEmpty(){
   }
 }
 
-template <class temp>
-int bstTable<temp>::getSize(){
-
-}
-
-template <class temp>
-temp bstTable<temp>::getMin(){
-
-}
+// template <class temp>
+// int bstTable<temp>::getSize(){
+//
+// }
+//
+// template <class temp>
+// temp bstTable<temp>::getMin(){
+//
+// }
 
 template <class temp>
 temp bstTable<temp>::getMax(){
-  TreeNode *current = root;
+  TreeNode<temp> *current = root;
   if(isEmpty())
-    return null;
+    return NULL;
 
   while(current->right != NULL){
     current = current->right;
@@ -227,8 +243,9 @@ temp bstTable<temp>::getMax(){
 }
 
 template <class temp>
-temp bstTable<temp>::recPrint(TreeNode *node){
+void bstTable<temp>::recPrint(TreeNode<temp> *node){
   if(node != NULL){
+    cout << "print ?" << endl;
     recPrint(node->left);
     cout << node->key << endl;
     recPrint(node->right);
@@ -241,10 +258,10 @@ void bstTable<temp>::printEntireTree(){
 }
 
 template <class temp>
-TreeNode* bstTable<temp>::getSuccessor(TreeNode *d){
-  TreeNode *sp = d;
-  TreeNode *successor = d;
-  TreeNode *current = d->right;
+TreeNode<temp>* bstTable<temp>::getSuccessor(TreeNode<temp> *d){
+  TreeNode<temp> *sp = d;
+  TreeNode<temp> *successor = d;
+  TreeNode<temp> *current = d->right;
 
   while(current != NULL){
     sp = successor;
