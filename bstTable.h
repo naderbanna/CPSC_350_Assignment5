@@ -47,6 +47,7 @@ class bstTable{
     temp* findNode(temp k);
 
     bool isEmpty();
+
     //unsigned int getSize();
     //temp getMin();
     temp getMax();
@@ -54,6 +55,8 @@ class bstTable{
     void printEntireTree();
 
     TreeNode<temp>* getSuccessor(TreeNode<temp> *d);
+
+    void deleteTree(TreeNode<temp>*&);
 };
 
 template <class temp>
@@ -64,14 +67,13 @@ bstTable<temp>::bstTable(){
 template <class temp>
 bstTable<temp>::~bstTable(){
   //iterate and deleted => 0(n)
-  //delete current;
+  deleteTree(root);
 }
 
 template <class temp>
 void bstTable<temp>::insertNode(temp value){
   TreeNode<temp> *node = new TreeNode<temp>(value);
   if(isEmpty()){
-    cout << "inserted to tree" << endl;
     root = node;
   }
   else{
@@ -91,13 +93,24 @@ void bstTable<temp>::insertNode(temp value){
       }
       else{
         current = current->right;
-        if(current = NULL){
+        if(current == NULL){
           parent->right = node;
           cout << "inserted to tree" << endl;
           break;
         }
       }
+      }
     }
+
+}
+
+template <class temp>
+void bstTable<temp>::deleteTree(TreeNode<temp> *&node){
+  if(root != nullptr){
+    deleteTree(node->left);
+    deleteTree(node->right);
+    delete root;
+    root = nullptr;
   }
 }
 

@@ -175,7 +175,7 @@ int main(int argc, char** argv){
       int tempFID = 0;
       string name = "";
       string department = "";
-      cout << "3. Please enter a faculty's ID to delete" << endl;
+      cout << "10. Please enter a faculty's ID to delete" << endl;
       cin >> tempFID;
       faculty f(tempFID, name, department);
       cout << facultyTable.deleteNode(f) << endl;
@@ -186,7 +186,7 @@ int main(int argc, char** argv){
       string name = "";
       string level = "";
       int advisor = 0;
-      cout << "3. Please enter a student's ID to pull records" << endl;
+      cout << "11. Please enter a student's ID to pull records" << endl;
       cin >> tempSID;
       student s(tempSID, name, level, advisor);
       studentTable.findNode(s)->print();
@@ -196,6 +196,7 @@ int main(int argc, char** argv){
 
     }
     if(option == "13"){
+      cout << "13. Rollback not functioning" << endl;
 
     }
     if(option == "14"){
