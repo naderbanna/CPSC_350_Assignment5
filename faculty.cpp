@@ -31,6 +31,18 @@ string faculty::getDep() const{
   return department;
 }
 
+void faculty::addAdvisee(int sID){
+  adviseeIDs->insertFront(sID);
+}
+
+void faculty::removeAdvisee(int sID){
+  adviseeIDs->deleteItem(sID);
+}
+
+void faculty::printAdvisees(){
+  adviseeIDs->printList();
+}
+
 bool faculty::operator==(const faculty& f){
   faculty f1 = *this;
   faculty f2 = f;

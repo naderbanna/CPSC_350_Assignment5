@@ -65,7 +65,7 @@ bool student::operator!=(const student& s){
 
 
 std::ostream& operator<<(std::ostream& os, const student& s){
-  os << s.getID();
+  os << s;
   //os = s.getID();
   return os;
 }

@@ -32,13 +32,6 @@ TreeNode<temp>::~TreeNode(){
 
 }
 
-// template <class temp>
-// bool TreeNode<temp>::operator!=(const TreeNode& t){
-//   TreeNode t1 = *this;
-//   TreeNode t2 = t;
-//   return t1 != t2;
-// }
-
 template <class temp>
 class bstTable{
   private:
@@ -51,6 +44,7 @@ class bstTable{
     bool searchNode(temp value);
     void insertNode(temp value);
     bool deleteNode(temp k);
+    temp* findNode(temp k);
 
     bool isEmpty();
     //unsigned int getSize();
@@ -125,6 +119,56 @@ bool bstTable<temp>::searchNode(temp value){
     }
   }
   return true;
+}
+
+// template <class temp>
+// temp bstTable<temp>::findNode(temp value){
+//   if(isEmpty())
+//     return NULL;
+//   else{
+//     cout << "finding" << endl;
+//     TreeNode<temp> *current = root;
+//     while(current->key != value){
+//       if(value < current->key)
+//         current = current->left;
+//       else
+//         current = current->right;
+//
+//       if(current == NULL)
+//         return NULL;
+//     }
+//   }
+//   return current->key;
+// }
+
+template <class temp>
+temp* bstTable<temp>::findNode(temp k){
+  //TreeNode<temp> *notNode;
+  if(isEmpty()){
+    //throw string("Node not found");
+    return NULL;
+  }
+
+  TreeNode<temp> *current = root;
+  TreeNode<temp> *parent = root;
+
+  while(current->key != k){
+    parent = current;
+
+    if(k < current->key){
+      current = current->left;
+    }
+    else{
+      current = current->right;
+    }
+    if(current == NULL){
+      //break;
+      return NULL;
+      //throw string("Node not found");
+    }
+  }
+
+  return new temp(current->key);
 }
 
 template <class temp>

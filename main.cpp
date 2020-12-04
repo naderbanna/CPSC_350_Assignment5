@@ -70,19 +70,49 @@ int main(int argc, char** argv){
       facultyTable.printEntireTree();
     }
     if(option == "3"){
-      int tempID = 0;
+      int tempSID = 0;
+      string name = "";
+      string level = "";
+      int advisor = 0;
       cout << "3. Please enter a student's ID to pull records" << endl;
-      cin >> tempID;
-
-
+      cin >> tempSID;
+      student s(tempSID, name, level, advisor);
+      studentTable.findNode(s)->print();
     }
     if(option == "4"){
+      int tempFID = 0;
+      string name = "";
+      string department = "";
 
+      cout << "4. Please enter a faculty's ID to pull records" << endl;
+      cin >> tempFID;
+      faculty f(tempFID, name, department);
+      facultyTable.findNode(f)->print();
     }
     if(option == "5"){
+      int tempSID = 0;
+      string name = "";
+      string level = "";
+      int advisor = 0;
+      string fname = "";
+      string department = "";
+      int tAdvisor = 0;
+      cout << "5. Please enter a student's ID" << endl;
+      cin >> tempSID;
+      student s(tempSID, name, level, advisor);
+      tAdvisor = studentTable.findNode(s)->getAdvisor();
+      faculty f(tAdvisor, fname, department);
+      facultyTable.findNode(f)->print();
 
     }
     if(option == "6"){
+      string fname = "";
+      string department = "";
+      int tempFID = 0;
+      cout << "6. Please enter a faculty's ID to print their advisees" << endl;
+      cin >> tempFID;
+      faculty f(tempFID, fname, department);
+      facultyTable.findNode(f)->printAdvisees();
 
     }
     if(option == "7"){
@@ -91,7 +121,7 @@ int main(int argc, char** argv){
       string name = "";
       string level = "";
       int advisor = 0;
-      cout << "3. Please enter a student's ID to begin new entry" << endl;
+      cout << "7. Please enter a student's ID to begin new entry" << endl;
       cin >> id;
       // cout << "Student ID: " << endl;
       // cin >> tempid;
@@ -104,11 +134,23 @@ int main(int argc, char** argv){
       student s(id, name, level, advisor);
       s.print();
       studentTable.insertNode(s);
-      cout << studentTable.searchNode(s) << endl;
+      //cout << studentTable.findNode(s)->print() << endl;
+      // try{
+      //   cout << studentTable.findNode(s).print() << endl;
+      // }catch(string std){
+      //   cout << "Node was not found" << endl;
+      // }
 
     }
     if(option == "8"){
-
+      int tempSID = 0;
+      string name = "";
+      string level = "";
+      int advisor = 0;
+      cout << "3. Please enter a student's ID to delete" << endl;
+      cin >> tempSID;
+      student s(tempSID, name, level, advisor);
+      cout << studentTable.deleteNode(s) << endl;
     }
     if(option == "9"){
       //enter new faculty
@@ -116,7 +158,7 @@ int main(int argc, char** argv){
       string fname = "";
       string department = 0;
 
-      cout << "3. Please enter a faculty's ID to begin new entry" << endl;
+      cout << "9. Please enter a faculty's ID to begin new entry" << endl;
       cin >> fid;
       cout << "Name: " << endl;
       cin >> fname;
@@ -130,9 +172,24 @@ int main(int argc, char** argv){
 
     }
     if(option == "10"){
+      int tempFID = 0;
+      string name = "";
+      string department = "";
+      cout << "3. Please enter a faculty's ID to delete" << endl;
+      cin >> tempFID;
+      faculty f(tempFID, name, department);
+      cout << facultyTable.deleteNode(f) << endl;
 
     }
     if(option == "11"){
+      int tempSID = 0;
+      string name = "";
+      string level = "";
+      int advisor = 0;
+      cout << "3. Please enter a student's ID to pull records" << endl;
+      cin >> tempSID;
+      student s(tempSID, name, level, advisor);
+      studentTable.findNode(s)->print();
 
     }
     if(option == "12"){
@@ -144,11 +201,6 @@ int main(int argc, char** argv){
     if(option == "14"){
       break;
     }
-
-
-
-
-
 
 
   }
