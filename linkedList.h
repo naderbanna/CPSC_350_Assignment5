@@ -22,12 +22,6 @@ class NaiveList{
     temp find(temp value);
     void deleteItem(temp id);
 
-    //int deletePos(int pos);
-    //int removeNode(int key);
-
-
-    //bool isEmpty();
-    //unsigned int getSize();
 };
 
 template <class temp>
@@ -103,7 +97,6 @@ void NaiveList<temp>::printList(){
 
 template <class temp>
 temp NaiveList<temp>::printFront(){
-
   return front->data;
 }
 

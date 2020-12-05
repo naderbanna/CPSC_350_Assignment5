@@ -16,7 +16,6 @@ student::student(int id, std::string n, std::string l, int a){
   name = n;
   level = l;
   advisor = a;
-  cout << "overloaded" << endl;
 }
 
 // student::~student(){
@@ -37,6 +36,10 @@ string student::getLevel() const{
 
 int student::getAdvisor() const{
   return advisor;
+}
+
+void student::setAdvisor(int a){
+  advisor = a;
 }
 
 bool student::operator==(const student& s){
@@ -73,7 +76,6 @@ std::ostream& operator<<(std::ostream& os, const student& s){
 
 
 void student::print(){
-
   cout << "ID: " << studentID << endl;
   cout << "Name: " << name << endl;
   cout << "Level: " << level << endl;

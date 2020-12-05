@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 template <class temp>
@@ -8,7 +9,6 @@ class TreeNode{
     TreeNode(temp k);
     ~TreeNode();
 
-    //bool operator!= (const TreeNode& f);
     temp key;
     TreeNode *left;
     TreeNode *right;
@@ -57,6 +57,7 @@ class bstTable{
     TreeNode<temp>* getSuccessor(TreeNode<temp> *d);
 
     void deleteTree(TreeNode<temp>*&);
+    void saveTree(TreeNode<temp> *current, ofstream& file);
 };
 
 template <class temp>
@@ -302,9 +303,9 @@ temp bstTable<temp>::getMax(){
 template <class temp>
 void bstTable<temp>::recPrint(TreeNode<temp> *node){
   if(node != NULL){
-    cout << "print ?" << endl;
+    cout << endl << "Member Info: " << endl;
     recPrint(node->left);
-    cout << node->key << endl;
+    node->key.print();
     recPrint(node->right);
   }
 }
@@ -330,4 +331,21 @@ TreeNode<temp>* bstTable<temp>::getSuccessor(TreeNode<temp> *d){
     successor->right = d->right;
   }
   return successor;
+}
+
+template <class temp>
+void bstTable<temp>::saveTree(TreeNode<temp> *current, ofstream& file){
+  // if(current == NULL){
+  //   file << "#" << ";";
+  // }
+  file << current->key.getID() << "*";
+  file << current->key.getName() << "*";
+  file << current->key.getLevel() << "*";
+  file << current->key.getAdvisor() << "*";
+  file << "|";
+
+  cout << "writing to .txt" << endl;
+  saveTree(current->left, file);
+  saveTree(current->right, file);
+
 }

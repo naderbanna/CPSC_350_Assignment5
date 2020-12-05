@@ -33,13 +33,16 @@ string faculty::getDep() const{
 
 void faculty::addAdvisee(int sID){
   adviseeIDs->insertFront(sID);
+  cout  << "advisee added to faculty" << endl;
 }
 
 void faculty::removeAdvisee(int sID){
   adviseeIDs->deleteItem(sID);
+  cout  << "advisee removed from faculty" << endl;
 }
 
 void faculty::printAdvisees(){
+  cout  << "List of advisees" << endl;
   adviseeIDs->printList();
 }
 
@@ -70,7 +73,7 @@ bool faculty::operator!=(const faculty& s){
   return s1.getID() != s2.getID();
 }
 std::ostream& operator<<(std::ostream& os, const faculty& f){
-  os << f.getID();
+  os << f;
   //os = s.getID();
   return os;
 }

@@ -19,6 +19,7 @@ class student{
     std::string getName() const;
     std::string getLevel() const;
     int getAdvisor() const;
+    void setAdvisor(int a);
 
     bool operator== (const student&);
     bool operator< (const student&);
